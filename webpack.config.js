@@ -58,13 +58,41 @@ const config = {
     }
   },
   devServer: {
-    contentBase: './dist'
+    host: 'localhost',
+    port: 8080,
+    contentBase: path.join(__dirname, 'build'),
+    publicPath: '/',
+    hot: true,
+    historyApiFallback: true,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+    },
+    proxy: {
+      '/oauth/**': {
+        target: 'http://localhost:3000',
+        secure: false,
+      },
+      '/favorites/**': {
+        target: 'http://localhost:3000',
+        secure: false,
+      },
+      '/vote/**': {
+        target: 'http://localhost:3000',
+        secure: false,
+      },
+      '/cocktail/**': {
+        target: 'http://localhost:3000',
+        secure: false,
+      },
+    }
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      appMountId: 'app',
-      filename: 'index.html'
-    })
+    new HtmlWebPackPlugin({
+      template: path.resolve(__dirname, 'client/template.html'),
+      filename: 'index.html',
+      alwaysWriteToDisk: true,
+    }),
+    new HtmlWebpackHarddiskPlugin(),
   ]
 };
 
