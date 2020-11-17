@@ -1,6 +1,7 @@
 
 import React from "react";
 import { hot } from 'react-hot-loader/root';
+import LoginButton from './LoginButton';
 
 class App extends React.Component {
   render() {
@@ -8,8 +9,9 @@ class App extends React.Component {
     return (
       <>
         <h1 className="text-4xl text-white bg-black">
-          Hello {name}
+          Hello Nelson
         </h1>
+        <LoginButton />
       </>
     );
   }
