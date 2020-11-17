@@ -1,6 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebPackPlugin = require('html-webpack-plugin');
 
 const config = {
   entry: [
@@ -27,8 +27,7 @@ const config = {
             options: {
               importLoaders: 1
             }
-          },
-          'postcss-loader'
+          }
         ]
       },
       {
@@ -88,11 +87,10 @@ const config = {
   },
   plugins: [
     new HtmlWebPackPlugin({
-      template: path.resolve(__dirname, 'client/template.html'),
+      template: path.resolve(__dirname, 'index.html'),
       filename: 'index.html',
       alwaysWriteToDisk: true,
     }),
-    new HtmlWebpackHarddiskPlugin(),
   ]
 };
 
