@@ -8,13 +8,7 @@ import ingredients from '../Ingredients';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
-    root: {
-      '& > *': {
-        margin: theme.spacing(1),
-      },
-    },
     btn: {
-      //margin: theme.spacing(1, 0, 1),
       marginLeft: '5px'
     },
     tagsWrapper: {
