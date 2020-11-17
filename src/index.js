@@ -8,8 +8,8 @@ import "./styles.css";
 
 var mountNode = document.getElementById("app");
 ReactDOM.render(<Auth0Provider
-  domain="YOUR_DOMAIN"
-  clientId="YOUR_CLIENT_ID"
+  domain="dev-npfgwcag.us.auth0.com"
+  clientId="QmpBLwJL6dsb6LPHDlO0z2KFucJC59Wz"
   redirectUri={window.location.origin}
 >
   <App />
