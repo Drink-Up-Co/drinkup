@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import { Auth0Provider } from "@auth0/auth0-react";
-import Favorites from './Components/Main/Favorites';
+import Favorites from './Components/Favorites/Favorites';
 import {
   HashRouter as Router,
   Route,

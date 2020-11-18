@@ -1,41 +1,45 @@
 import React from 'react';
-import { useAuth0 } from "@auth0/auth0-react";
 import { makeStyles, createStyles } from '@material-ui/core/styles';
-import LocalBarIcon from '@material-ui/icons/LocalBar';
-import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
 import SearchBox from '../Search/SearchBox';
+import Results from '../Content/Results';
+import hero from '../../Images/banner.png';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
-    container: {
+    root: {
       display: 'flex',
-      flexDirection: 'row',
-      width: '400px',
-      justifyContent: 'space-between',
-      marginRight: '40px'
-    },
-    favorites: {
-      display: 'flex',
-      flexDirection: 'row',
+      flexDirection: 'column',
       alignItems: 'center',
-      color: 'white',
-      cursor: 'pointer',
-      fontSize: '18px',
-      textDecoration: 'none'
+      width: '100%',
+      margin: '0px',
+      backgroundImage: `url(${hero})`,
+      backgroundSize: 'cover',
+      height: '800px'  
     },
-    img: {
-      height: '50px',
-      borderRadius: '30px',
-      marginLeft: '10px'  
+    title: {
+      fontSize: '90px',
+      color: 'white',
+      fontFamily: 'Arial, Helvetica, sans-serif',
+      marginBottom: '400px',
+      paddingRight: '550px'
+    },
+    block: {
+      height: '400px',
+      border: '1px solid black',
+      backgroundColor: 'blue'
     }
   }),
 );
 
 const Main = (props) => {
-  
+  const classes = useStyles();
   return (
     <>
-      <SearchBox />
+      <div className={classes.root}>
+        <h1 className={classes.title}>Time To Drink Up</h1>
+        <SearchBox />
+      </div>
+        <Results />
     </>
   );
 }
