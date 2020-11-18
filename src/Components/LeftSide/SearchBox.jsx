@@ -39,6 +39,7 @@ const SearchBox = () => {
   const textFieldRef = useRef();
 
   const options = ingredients.map((option) => {
+    console.log(option.name[0].toUpperCase());
     const firstLetter = option.name[0].toUpperCase();
     return {
       firstLetter: /[0-9]/.test(firstLetter) ? '0-9' : firstLetter,
@@ -99,7 +100,7 @@ const SearchBox = () => {
         />
         <Button
           variant="contained"
-          size="large"
+          size="medium"
           color="primary" 
           onClick={handleAddClick}
           className={classes.btn}
@@ -108,7 +109,7 @@ const SearchBox = () => {
         </Button>
         <Button
           variant="contained"
-          size="large"
+          size="medium"
           color="primary"  
           onClick={handleSearchClick}
           className={classes.btn}
