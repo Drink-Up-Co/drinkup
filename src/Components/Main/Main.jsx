@@ -1,8 +1,9 @@
 import React from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import SearchBox from '../Search/SearchBox';
-import Results from '../Content/Results';
 import hero from '../../Images/banner.png';
+import CardsContainer from './CardsContainer';
+// import Results from '../Content/Results';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -34,13 +35,13 @@ const useStyles = makeStyles((theme) =>
 const Main = (props) => {
   const classes = useStyles();
   return (
-    <>
+    <div>
       <div className={classes.root}>
         <h1 className={classes.title}>Time To Drink Up</h1>
         <SearchBox />
       </div>
-        <Results />
-    </>
+        <CardsContainer />
+    </div>
   );
 }
 
