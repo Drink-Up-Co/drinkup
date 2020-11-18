@@ -1,9 +1,7 @@
 import React from 'react';
-import { useAuth0 } from "@auth0/auth0-react";
 import { makeStyles, createStyles } from '@material-ui/core/styles';
-import LocalBarIcon from '@material-ui/icons/LocalBar';
-import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
 import SearchBox from '../Search/SearchBox';
+import Results from '../Content/Results';
 import hero from '../../Images/banner.png';
 
 const useStyles = makeStyles((theme) =>
@@ -11,7 +9,6 @@ const useStyles = makeStyles((theme) =>
     root: {
       display: 'flex',
       flexDirection: 'column',
-      // justifyContent: 'center',
       alignItems: 'center',
       width: '100%',
       margin: '0px',
@@ -25,6 +22,11 @@ const useStyles = makeStyles((theme) =>
       fontFamily: 'Arial, Helvetica, sans-serif',
       marginBottom: '400px',
       paddingRight: '550px'
+    },
+    block: {
+      height: '400px',
+      border: '1px solid black',
+      backgroundColor: 'blue'
     }
   }),
 );
@@ -32,10 +34,13 @@ const useStyles = makeStyles((theme) =>
 const Main = (props) => {
   const classes = useStyles();
   return (
+    <>
       <div className={classes.root}>
-        <h1 className={classes.title}>It's Happy Hour</h1>
+        <h1 className={classes.title}>Time To Drink Up</h1>
         <SearchBox />
       </div>
+        <Results />
+    </>
   );
 }
 

@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) =>
       justifyContent: 'space-between',
       alignItems: 'center',
       height: '70px',
-      backgroundColor: '#676b70',
+      backgroundColor: '#2e050d',
       margin: '0px',
       padding: '0px'
     },
