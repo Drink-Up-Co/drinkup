@@ -1,7 +1,7 @@
 
 import React from "react";
 import { hot } from 'react-hot-loader/root';
-import SearchBox from './Components/LeftSide/SearchBox';
+import Main from './Components/Main/Main';
 import Header from './Components/Header/Header';
 
 class App extends React.Component {
@@ -10,7 +10,7 @@ class App extends React.Component {
     return (
       <>
         <Header />
-        <SearchBox />
+        <Main />
       </>
     );
   }
