@@ -99,7 +99,7 @@ const SearchBox = () => {
         />
         <Button
           variant="contained"
-          size="medium"
+          size="large"
           color="primary" 
           onClick={handleAddClick}
           className={classes.btn}
@@ -108,7 +108,7 @@ const SearchBox = () => {
         </Button>
         <Button
           variant="contained"
-          size="medium"
+          size="large"
           color="primary"  
           onClick={handleSearchClick}
           className={classes.btn}

@@ -41,4 +41,4 @@ const ingredients = ingredientsArray.map(ingredient => {
   return obj;
 });
 
-//export default ingredients;
+export default ingredients;
