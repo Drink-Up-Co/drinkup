@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) =>
 
 const ingredientsList = [];
 
-const SearchBox = () => {
+const SearchBox = ({ setCocktailList }) => {
   const classes = useStyles();
   const [input, setInput] = useState('');
   const [tagsArray, setTagsArray] = useState([]);
@@ -61,6 +61,8 @@ const SearchBox = () => {
   const handleSearchClick = (e) => {
     console.log('send fetch request to server');
     console.log(ingredientsList);
+    // list of cocktails we get back after fetch request with ingredients list
+    setCocktailList(result);
   }
 
 
