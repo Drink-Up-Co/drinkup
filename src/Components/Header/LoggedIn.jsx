@@ -1,7 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
-import LoginButton from './LoginButton';
-import { TextField, Button } from '@material-ui/core';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+import React from 'react';
+import { useAuth0 } from "@auth0/auth0-react";
+import { makeStyles, createStyles } from '@material-ui/core/styles';
 import LocalBarIcon from '@material-ui/icons/LocalBar';
 
 const useStyles = makeStyles((theme) =>
@@ -20,12 +19,18 @@ const useStyles = makeStyles((theme) =>
       color: 'white',
       cursor: 'pointer',
       fontSize: '18px',
-
+    },
+    img: {
+      height: '50px',
+      borderRadius: '30px',
+      marginLeft: '10px'  
     }
   }),
 );
 
 const LoggedIn = (props) => {
+  const { user, isAuthenticated, isLoading } = useAuth0();
+  const { nickname, picture } = user;
   const classes = useStyles();
   return (
     <div className={classes.container}>
@@ -34,7 +39,8 @@ const LoggedIn = (props) => {
         <LocalBarIcon />
       </div>
       <div className={classes.favorites}>
-        Hi, Diego --img--
+        {nickname}
+        <img src={picture} className={classes.img}/>
       </div>
     </div>  
   );

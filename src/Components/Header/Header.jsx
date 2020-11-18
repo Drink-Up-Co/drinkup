@@ -1,8 +1,7 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React from 'react';
 import LoginButton from './LoginButton';
-import { TextField, Button } from '@material-ui/core';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import LocalBarIcon from '@material-ui/icons/LocalBar';
+import { useAuth0 } from "@auth0/auth0-react";
+import { makeStyles, createStyles } from '@material-ui/core/styles';
 import LoggedIn from './LoggedIn';
 
 const useStyles = makeStyles((theme) =>
@@ -29,12 +28,12 @@ const useStyles = makeStyles((theme) =>
 );
 
 const Header = (props) => {
-  const [loggedIn, setLoggedIn] = useState(true);
+  const { user, isAuthenticated, isLoading } = useAuth0();
   const classes = useStyles();
   return (
     <div className={classes.container}>
       <h1 className={classes.logo}>Drink Up</h1>
-      {loggedIn 
+      {isAuthenticated 
         ? <LoggedIn style={{paddingRight: '10px'}} /> 
         : <LoginButton style={{paddingRight: '10px'}} />} 
     </div>

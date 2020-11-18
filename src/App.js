@@ -10,8 +10,6 @@ class App extends React.Component {
     return (
       <>
         <Header />
-        <h1 className="text-4xl text-white bg-black">
-        </h1>
         <SearchBox />
       </>
     );
