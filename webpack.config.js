@@ -59,7 +59,7 @@ const config = {
   devServer: {
     host: 'localhost',
     port: 8080,
-    contentBase: path.join(__dirname, 'build'),
+    contentBase: path.join(__dirname, 'dist'),
     publicPath: '/',
     hot: true,
     historyApiFallback: true,
@@ -67,20 +67,24 @@ const config = {
       'Access-Control-Allow-Origin': '*',
     },
     proxy: {
+      '/': {
+        target: 'http://localhost:5432',
+        secure: false
+      },
       '/oauth/**': {
-        target: 'http://localhost:3000',
+        target: 'http://localhost:5432/oauth',
         secure: false,
       },
       '/favorites/**': {
-        target: 'http://localhost:3000',
+        target: 'http://localhost:5432/favorites',
         secure: false,
       },
       '/vote/**': {
-        target: 'http://localhost:3000',
+        target: 'http://localhost:5432/vote',
         secure: false,
       },
       '/cocktail/**': {
-        target: 'http://localhost:3000',
+        target: 'http://localhost:5432/cocktail',
         secure: false,
       },
     }
