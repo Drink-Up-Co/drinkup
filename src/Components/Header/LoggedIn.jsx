@@ -2,6 +2,7 @@ import React from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import LocalBarIcon from '@material-ui/icons/LocalBar';
+import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -19,6 +20,7 @@ const useStyles = makeStyles((theme) =>
       color: 'white',
       cursor: 'pointer',
       fontSize: '18px',
+      textDecoration: 'none'
     },
     img: {
       height: '50px',
@@ -34,10 +36,10 @@ const LoggedIn = (props) => {
   const classes = useStyles();
   return (
     <div className={classes.container}>
-      <div className={classes.favorites}>
-        My Favorite Drinks
-        <LocalBarIcon />
-      </div>
+      <Link className={classes.favorites} to={'/favorites'}>
+          My Favorite Drinks
+          <LocalBarIcon />
+      </Link>
       <div className={classes.favorites}>
         {nickname}
         <img src={picture} className={classes.img}/>
