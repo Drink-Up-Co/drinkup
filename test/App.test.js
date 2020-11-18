@@ -1,13 +1,15 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import { getQueriesForElement } from '@testing-library/dom';
+import { render, fireEvent } from '@testing-library/react';
+import { App } from '../src/App'
 
 test('renders correct content', () => {
-  const root = document.createElement('div')
-  ReactDOM.render(<App />, root)
+  const { getByText, getByLabelText } = render(<App />);
 
-  const { getByText, getByLabelText } = getQueriesForElement(root);
-
-
+  getByText('Time To Drink Up');
 })
 
+test('allows users to select and add ingredients to the search', () => {
+  const { getByText, getByLabelText } = render(<App />);
+
+  getByText('Time To Drink Up');
+})

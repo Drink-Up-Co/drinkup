@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -15,10 +15,14 @@ import Collapse from '@material-ui/core/Collapse';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 345,
+    minWidth: 800,
+    maxWidth: 800,
+    padding: 16, 
+    margin: 8,
+    // flexGrow: 1
   },
   media: {
-    height: 140,
+    height: 360,
   },
   expand: {
     marginLeft: 'auto',
@@ -28,23 +32,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MediaCard() {
+export default function CocktailCard({ drinkId, name, image}) {
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
   return (
-    <Card className={classes.root}>
+    <Card className={classes.root} id={drinkId}>
       <CardActionArea>
-        <CardMedia className={classes.media} />
+        <CardMedia className={classes.media} image={image}/>
         <CardContent>
           <Typography gutterBottom variant='h5' component='h2'>
-            Sake Bomb
+            {name}
           </Typography>
           <Typography variant='body2' color='textSecondary' component='p'>
-            Description of what a Sake Bomb is ...
+            Ingredients: ...
           </Typography>
         </CardContent>
       </CardActionArea>

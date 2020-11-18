@@ -12,8 +12,6 @@ function App() {
     <>
       <ListContext.Provider value={[cocktailList, setCocktailList]} >
         <Header />
-        <h1 className="text-4xl text-white bg-black">
-        </h1>
         <Main />
         {/* <SearchBox setCocktailList={setCocktailList}/> */}
       </ListContext.Provider>
