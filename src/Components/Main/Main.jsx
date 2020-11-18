@@ -4,39 +4,38 @@ import { makeStyles, createStyles } from '@material-ui/core/styles';
 import LocalBarIcon from '@material-ui/icons/LocalBar';
 import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
 import SearchBox from '../Search/SearchBox';
+import hero from '../../Images/banner.png';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
-    container: {
+    root: {
       display: 'flex',
-      flexDirection: 'row',
-      width: '400px',
-      justifyContent: 'space-between',
-      marginRight: '40px'
-    },
-    favorites: {
-      display: 'flex',
-      flexDirection: 'row',
+      flexDirection: 'column',
+      // justifyContent: 'center',
       alignItems: 'center',
-      color: 'white',
-      cursor: 'pointer',
-      fontSize: '18px',
-      textDecoration: 'none'
+      width: '100%',
+      margin: '0px',
+      backgroundImage: `url(${hero})`,
+      backgroundSize: 'cover',
+      height: '800px'  
     },
-    img: {
-      height: '50px',
-      borderRadius: '30px',
-      marginLeft: '10px'  
+    title: {
+      fontSize: '90px',
+      color: 'white',
+      fontFamily: 'Arial, Helvetica, sans-serif',
+      marginBottom: '400px',
+      paddingRight: '550px'
     }
   }),
 );
 
 const Main = (props) => {
-  
+  const classes = useStyles();
   return (
-    <>
-      <SearchBox />
-    </>
+      <div className={classes.root}>
+        <h1 className={classes.title}>It's Happy Hour</h1>
+        <SearchBox />
+      </div>
   );
 }
 

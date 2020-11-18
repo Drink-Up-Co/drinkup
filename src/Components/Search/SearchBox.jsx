@@ -8,6 +8,16 @@ import ingredients from '../Ingredients';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
+    root:{
+      display: 'flex',
+      flexDirection: 'column',
+      background: 'rgb(250, 250, 250, .92)',
+      height: '200px',
+      padding: '20px',
+      borderRadius: '10px',
+      width: '500px',
+      marginTop: '-50px'
+    },
     btn: {
       marginLeft: '5px'
     },
@@ -23,7 +33,8 @@ const useStyles = makeStyles((theme) =>
     },
     title: {
       fontFamily: 'Arial, Helvetica, sans-serif',
-      color: '#505052'
+      color: '#505052',
+      textAlign: 'center'
     }
   }),
 );
@@ -35,7 +46,6 @@ const SearchBox = () => {
   const [input, setInput] = useState('');
   const [tagsArray, setTagsArray] = useState([]);
   const [searchError, setSearchError] = useState(false);
-  const searchRef = useRef();
   const textFieldRef = useRef();
 
   const options = ingredients.map((option) => {
@@ -85,11 +95,10 @@ const SearchBox = () => {
   }
 
   return (
-    <div>
+    <div className={classes.root}>
       <h2 className={classes.title}>Select ingredients you have</h2>
       <div className={classes.searchFormWrapper}>
         <Autocomplete
-          ref={searchRef}
           id="ingredients"
           options={options.sort((a, b) => -b.firstLetter.localeCompare(a.firstLetter))}
           groupBy={(option) => option.firstLetter}
