@@ -1,7 +1,7 @@
 
 import React, { useState, createContext, useContext } from "react";
 import { hot } from 'react-hot-loader/root';
-import SearchBox from './Components/LeftSide/SearchBox';
+import Main from './Components/Main/Main';
 import Header from './Components/Header/Header';
 
 export const ListContext = createContext([[], () => {}]);
@@ -14,7 +14,8 @@ function App() {
         <Header />
         <h1 className="text-4xl text-white bg-black">
         </h1>
-        <SearchBox setCocktailList={setCocktailList}/>
+        <Main />
+        {/* <SearchBox setCocktailList={setCocktailList}/> */}
       </ListContext.Provider>
     </>
   );

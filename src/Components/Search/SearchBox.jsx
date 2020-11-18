@@ -1,10 +1,11 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import { TextField, Button } from '@material-ui/core';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import SearchTag from './SearchTag';
 import SearchError from './SearchError';
 import ingredients from '../Ingredients';
+import { ListContext } from '../../App';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -30,13 +31,14 @@ const useStyles = makeStyles((theme) =>
 
 const ingredientsList = [];
 
-const SearchBox = ({ setCocktailList }) => {
+const SearchBox = () => {
   const classes = useStyles();
   const [input, setInput] = useState('');
   const [tagsArray, setTagsArray] = useState([]);
   const [searchError, setSearchError] = useState(false);
   const searchRef = useRef();
   const textFieldRef = useRef();
+  const [cocktailList, setCocktailList] = useContext(ListContext);
 
   const options = ingredients.map((option) => {
     const firstLetter = option.name[0].toUpperCase();
@@ -60,9 +62,23 @@ const SearchBox = ({ setCocktailList }) => {
 
   const handleSearchClick = (e) => {
     console.log('send fetch request to server');
-    console.log(ingredientsList);
+    console.log('ingredients list --> ', ingredientsList);
+    const myBody = {
+      ingredients: ingredientsList
+    }
+    fetch('/cocktail', {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(myBody)
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        setCocktailList(data)})
+      .catch(err => console.log(err));
     // list of cocktails we get back after fetch request with ingredients list
-    setCocktailList(result);
   }
 
 

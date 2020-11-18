@@ -1,13 +1,9 @@
 import React from 'react'
 
-function Cards() {
+export default Results = (props) => {
   return (
     <div>
-      
+
     </div>
   )
-}
-
-export default Cards
-
-
+} 
