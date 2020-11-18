@@ -15,7 +15,6 @@ const LoginButton = () => {
   const { loginWithRedirect } = useAuth0();
   const classes = useStyles();
 
-
   return (
     <Button 
       onClick={() => loginWithRedirect()}

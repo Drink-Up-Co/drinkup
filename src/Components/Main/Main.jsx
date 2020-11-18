@@ -3,6 +3,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import LocalBarIcon from '@material-ui/icons/LocalBar';
 import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
+import SearchBox from '../Search/SearchBox';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -30,22 +31,13 @@ const useStyles = makeStyles((theme) =>
   }),
 );
 
-const LoggedIn = (props) => {
-  const { user, isAuthenticated, isLoading } = useAuth0();
-  const { nickname, picture } = user;
-  const classes = useStyles();
+const Main = (props) => {
+  
   return (
-    <div className={classes.container}>
-      <Link className={classes.favorites} to={'/favorites'}>
-          My Favorite Drinks
-          <LocalBarIcon />
-      </Link>
-      <div className={classes.favorites}>
-        {nickname}
-        <img src={picture} className={classes.img}/>
-      </div>
-    </div>  
+    <>
+      <SearchBox />
+    </>
   );
 }
 
-export default LoggedIn;
+export default Main;
