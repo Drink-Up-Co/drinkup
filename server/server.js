@@ -14,6 +14,7 @@ const PORT = 3000;
 
 const cocktailRouter = require('./routes/cocktail');
 const oauthRouter = require('./routes/oauth');
+const favoritesRouter = require('./routes/favorites');
 
 // parses incoming data in request body
 server.use(express.json());
@@ -29,8 +30,8 @@ server.use(express.static(path.resolve(__dirname, '../index.html')));
 
 server.use('/oauth', oauthRouter);
 server.use('/cocktail', cocktailRouter);
+server.use('/favorites', favoritesRouter);
 server.get('/upvote');
-server.get('/favorites');
 
 // catch all route handler must be at the end
 server.use('*', (req, res) => res.sendStatus(404));

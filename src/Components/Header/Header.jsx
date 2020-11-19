@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) =>
   }),
 );
 
-const Header = (props) => {
+const Header = ({ setUserId }) => {
   const { user, isAuthenticated } = useAuth0();
   const classes = useStyles();
   console.log(user);
@@ -43,7 +43,11 @@ const Header = (props) => {
       body: JSON.stringify(user)
     })
       .then(res => res.json())
-      .then(data => console.log("User saved in database - client side"))
+      .then(data => {
+        console.log("User saved in database - client side")
+        console.log("LOGIN DATA: ", data);
+        setUserId(data.userId);
+      })
       .catch(err => console.log(err));
   }
 

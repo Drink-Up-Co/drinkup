@@ -1,11 +1,10 @@
-import React, { useState, useRef, useEffect, useContext } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { TextField, Button } from '@material-ui/core';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Autocomplete, { createFilterOptions } from '@material-ui/lab/Autocomplete';
 import SearchTag from './SearchTag';
 import SearchError from './SearchError';
 import ingredients from '../Ingredients';
-import { ListContext } from '../../App';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -42,13 +41,12 @@ const useStyles = makeStyles((theme) =>
 
 const ingredientsList = [];
 
-const SearchBox = () => {
+const SearchBox = ({ setCocktailList}) => {
   const classes = useStyles();
   const [input, setInput] = useState('');
   const [tagsArray, setTagsArray] = useState([]);
   const [searchError, setSearchError] = useState(false);
   const textFieldRef = useRef();
-  const [cocktailList, setCocktailList] = useContext(ListContext);
 
   const options = ingredients.map((option) => {
     const firstLetter = option.name[0].toUpperCase();

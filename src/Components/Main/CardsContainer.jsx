@@ -1,6 +1,5 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import CocktailCard from '../Card/CocktailCard'
-import { ListContext } from '../../App';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) =>
@@ -18,8 +17,7 @@ const useStyles = makeStyles((theme) =>
   }),
 );
 
-function CardsContainer() {
-  const [cocktailList] = useContext(ListContext);
+function CardsContainer({ cocktailList }) {
   const classes = useStyles();
 
   const cocktailCards = cocktailList.map((cocktail, i) => (
