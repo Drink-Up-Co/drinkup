@@ -1,10 +1,11 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import { TextField, Button } from '@material-ui/core';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Autocomplete, { createFilterOptions } from '@material-ui/lab/Autocomplete';
 import SearchTag from './SearchTag';
 import SearchError from './SearchError';
 import ingredients from '../Ingredients';
+import { CardContext } from '../../App';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -46,6 +47,7 @@ const SearchBox = ({ setCocktailList}) => {
   const [input, setInput] = useState('');
   const [tagsArray, setTagsArray] = useState([]);
   const [searchError, setSearchError] = useState(false);
+  const [newCard, setNewCard] = useContext(CardContext);
   const textFieldRef = useRef();
 
   const options = ingredients.map((option) => {
@@ -69,8 +71,6 @@ const SearchBox = ({ setCocktailList}) => {
   }
 
   const handleSearchClick = (e) => {
-    console.log('send fetch request to server');
-    console.log('ingredients list --> ', ingredientsList);
     const myBody = {
       ingredients: ingredientsList
     }
@@ -83,17 +83,13 @@ const SearchBox = ({ setCocktailList}) => {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         setCocktailList(data)
         ingredientsList = [];
         setTagsArray([]);
-        setInput('dog');
-        console.log('input -->', input);
+        setNewCard(newCard + 1);
       })  
       .catch(err => console.log(err));
-    
-    console.log('fetch complete');
-    // list of cocktails we get back after fetch request with ingredients list
+      // list of cocktails we get back after fetch request with ingredients list
   }
 
   const generateTags = () => {

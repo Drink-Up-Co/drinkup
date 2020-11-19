@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -12,6 +12,7 @@ import IconButton from '@material-ui/core/IconButton';
 import clsx from 'clsx';
 import Collapse from '@material-ui/core/Collapse';
 import { UserContext } from '../../App';
+import { CardContext } from '../../App';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,6 +40,11 @@ export default function CocktailCard({ drinkId, name, image }) {
   const [ingredients, setIngredients] = useState('');
   const [clicked, setClicked] = useState(false);
   const [userId] = useContext(UserContext);
+  const [newCard] = useContext(CardContext);
+
+  useEffect(() =>{
+    setIngredients('');
+  },[newCard]);
 
   const handleExpandClick = () => {
     if (info === '') {
@@ -51,7 +57,6 @@ export default function CocktailCard({ drinkId, name, image }) {
       })
         .then(res => res.json())
         .then(data => {
-          console.log("More Info Data: ", data);
           setInfo(data.instructions);
         })
         .catch(err => console.log(err));
@@ -70,7 +75,6 @@ export default function CocktailCard({ drinkId, name, image }) {
       })
         .then(res => res.json())
         .then(data => {
-          console.log("More Info Data: ", data);
           setIngredients(data.ingredients);
         })
         .catch(err => console.log(err));
