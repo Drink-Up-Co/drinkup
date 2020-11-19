@@ -20,8 +20,14 @@ router
         res.send(response.rows);
       })
   })
-  .post('/addToMyFav', (req, res) => {
-    res.sendStatus(200);
+  .post('/addToMyFav', favoritesController.checkCocktailTable, favoritesController.addToCocktailTable, favoritesController.checkFavoritesTable, favoritesController.addToFavorites, (req, res) => {
+    res.status(200).send({ favorite: res.locals.favorite })
+  })
+  .delete('/deleteFromFav', favoritesController.checkFavoritesTable, favoritesController.deleteFromFavorites, (req, res) => {
+    res.status(200).send({ favorite: res.locals.favorite })
+  })
+  .post('/test', favoritesController.checkCocktailTable, favoritesController.addToCocktailTable, (req, res) => {
+    res.status(200).send({ favorite: res.locals.favorite })
   })
 
 module.exports = router;

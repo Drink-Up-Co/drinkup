@@ -3,9 +3,6 @@ import { makeStyles, createStyles } from '@material-ui/core/styles';
 import SearchBox from '../Search/SearchBox';
 import hero from '../../Images/banner.png';
 import CardsContainer from './CardsContainer';
-// import Results from '../Content/Results';
-
-export const ListContext = createContext([[], () => {}]);
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -39,15 +36,13 @@ const Main = (props) => {
   const [cocktailList, setCocktailList] = useState([]);
 
   return (
-    <ListContext.Provider value={[cocktailList, setCocktailList]} >
-      <div>
-        <div className={classes.root}>
-          <h1 className={classes.title}>Time To Drink Up</h1>
-          <SearchBox setCocktailList={setCocktailList} />
-        </div>
-          <CardsContainer cocktailList={cocktailList} />
+    <div>
+      <div className={classes.root}>
+        <h1 className={classes.title}>Time To Drink Up</h1>
+        <SearchBox setCocktailList={setCocktailList} />
       </div>
-    </ListContext.Provider>
+        <CardsContainer cocktailList={cocktailList} />
+    </div>
   );
 }
 
