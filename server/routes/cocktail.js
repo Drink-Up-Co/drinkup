@@ -8,14 +8,13 @@ router
     console.log('req.body ',req.body);
     console.log('ingredients received in server --> ', ingredients)
     const ingredientsString = ingredients.join();
-    let url = `https://www.thecocktaildb.com/api/json/v2/9973533/filter.php?i=${ ingredientsString }`
-    console.log(url)
-
+    let url = `https://www.thecocktaildb.com/api/json/v2/9973533/filter.php?i=${ingredientsString}`;
     fetch(url)
       .then(res => res.json())
       .then(data => {
         console.log("response -->", data.drinks);
-        res.send(data.drinks);
+        if (data.drinks === 'None Found') res.send([]);
+        else res.send(data.drinks);
       })
       .catch(err => console.log(err))
   })
