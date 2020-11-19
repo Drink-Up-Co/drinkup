@@ -7,7 +7,7 @@ import Header from './Components/Header/Header';
 export const UserContext = createContext(NaN);
 
 function App() {
-  const [userId, setUserId] = useState(Nan);
+  const [userId, setUserId] = useState(NaN);
   return (
     <>
       <UserContext.Provider value={[userId, setUserId]} >

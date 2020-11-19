@@ -2,7 +2,7 @@ const db = require("../models/model");
 
 module.exports = {
   checkUser: (req, res, next) => {
-    const query = 'SELECT username FROM users WHERE username = $1';
+    const query = 'SELECT id, username FROM users WHERE username = $1';
     const values = [req.body.nickname];
     db.query(query, values)
       .then(response => {
