@@ -1,6 +1,5 @@
 const path = require('path');
 const express = require('express');
-const fetch = require('node-fetch');
 
 // Require in your controllers:
 const controller = require('./controllers/controllers.js');
@@ -12,6 +11,9 @@ const { response } = require('express');
 // create express app instance
 const server = express();
 const PORT = 3000;
+
+const cocktailRouter = require('./routes/cocktail');
+const oauthRouter = require('./routes/oauth');
 
 // parses incoming data in request body
 server.use(express.json());
@@ -25,35 +27,8 @@ server.use(express.static(path.resolve(__dirname, '../index.html')));
 
 // GET/POST/DELETE route handlers:
 
-console.log('server.js running');
-server.post(
-  '/oauth',
-  (req, res, next) => {
-    console.log('hitting /test endpoint');
-    return next();
-  },
-  controller.test,
-  (req, res) => {
-    res.sendStatus(200);
-  }
-);
-// server.post('/oauth');
-server.post('/cocktail', (req, res) => {
-  const ingredients = req.body.ingredients;
-  console.log('req.body ',req.body);
-  console.log('ingredients received in server --> ', ingredients)
-  const ingredientsString = ingredients.join(); 
-  let url = `https://www.thecocktaildb.com/api/json/v2/9973533/filter.php?i=${ ingredientsString }`
-  console.log(url)
-
-  fetch(url)
-    .then(res => res.json())
-    .then(data => {
-      console.log("response -->", data.drinks);
-      res.send(data.drinks);
-    })
-    .catch(err => console.log(err))
-});
+server.use('/oauth', oauthRouter);
+server.use('/cocktail', cocktailRouter);
 server.get('/upvote');
 server.get('/favorites');
 

@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     minWidth: 800,
     maxWidth: 800,
-    padding: 16, 
+    padding: 16,
     margin: 8,
     // flexGrow: 1
   },
@@ -35,23 +35,62 @@ const useStyles = makeStyles((theme) => ({
 export default function CocktailCard({ drinkId, name, image}) {
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
+  const [info, setInfo] = useState('');
+  const [ingredients, setIngredients] = useState('');
 
   const handleExpandClick = () => {
+    if (info === '') {
+      fetch('/cocktail/moreInfo', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ drinkId })
+      })
+        .then(res => res.json())
+        .then(data => {
+          console.log("More Info Data: ", data);
+          setInfo(data.instructions);
+        })
+        .catch(err => console.log(err));
+    }
     setExpanded(!expanded);
   };
+
+  const handleGetIngredients = () => {
+    if (ingredients === '') {
+      fetch('/cocktail/ingredients', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ drinkId })
+      })
+        .then(res => res.json())
+        .then(data => {
+          console.log("More Info Data: ", data);
+          setIngredients(data.ingredients);
+        })
+        .catch(err => console.log(err));
+    }
+  }
+
   return (
     <Card className={classes.root} id={drinkId}>
       <CardActionArea>
         <CardMedia className={classes.media} image={image}/>
+      </CardActionArea>
         <CardContent>
           <Typography gutterBottom variant='h5' component='h2'>
             {name}
           </Typography>
           <Typography variant='body2' color='textSecondary' component='p'>
-            Ingredients: ...
+            Ingredients: {ingredients}
+            { (ingredients === '') &&
+               <button onClick={handleGetIngredients}>...</button>
+            }
           </Typography>
         </CardContent>
-      </CardActionArea>
       <CardActions>
         <IconButton aria-label='add to favorites'>
           <FavoriteIcon />
@@ -69,17 +108,7 @@ export default function CocktailCard({ drinkId, name, image}) {
       <Collapse in={expanded} timeout='auto' unmountOnExit>
         <CardContent>
           <Typography paragraph>
-            The sake bomb or sake bomber is a beer cocktail made by pouring sake
-            into a shot glass and dropping it into a glass of beer. Sometimes
-            two chopsticks are placed parallel on top of the glass of beer, and
-            the shot glass is placed on top of them.
-          </Typography>
-          <Typography paragraph>
-            1. Fill a Collins glass with the beer. <br></br> 2. Pour the sake
-            into a shot glass. Place 2 chopsticks on top of the glass and
-            balance the shot glass on the chopsticks. <br></br> 3. While doing
-            the "sake chant" the guest beats on table until shot glass falls
-            into the beer glass.
+            {info}
           </Typography>
         </CardContent>
       </Collapse>
