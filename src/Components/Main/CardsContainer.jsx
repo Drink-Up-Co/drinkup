@@ -7,8 +7,7 @@ const useStyles = makeStyles((theme) =>
     root:{
       height: '100%',
       margin: '0px 260px 0px 260px',
-      // border: '1px solid black',
-      backgroundColor: '#e27d60',
+      backgroundColor: theme.palette.primary.main,
       display: 'flex',
       flexDirection: 'row',
       justifyContent: 'space-evenly',
