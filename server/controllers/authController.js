@@ -2,21 +2,20 @@ const db = require("../models/model");
 
 module.exports = {
   checkUser: (req, res, next) => {
-    const query = 'SELECT * FROM users';
-    db.query(query)
+    const query = 'SELECT username FROM users WHERE username = $1';
+    const values = [req.body.nickname];
+    db.query(query, values)
       .then(response => {
-        for (let i = 0; i < response.rows.length; i+=1) {
-          if (response.rows[i].username === req.body.nickname) {
-            res.locals.userExists = true;
-            return next();
-          }
+        if (response.rows.length > 0) {
+          res.locals.userId = response.rows[0].id;
+          return next();
         }
         return next();
       })
       .catch(err => next(err));
   },
   saveUser: (req, res, next) => {
-    if (!res.locals.userExists) {
+    if (!res.locals.userId) {
       const query = 'INSERT INTO users(username, email) VALUES($1, $2)';
       const values = [req.body.nickname, req.body.email];
       db.query(query, values)

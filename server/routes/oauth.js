@@ -5,7 +5,7 @@ const authController = require("../controllers/authController");
 
 router
   .post('/login', authController.checkUser, authController.saveUser, (req, res) => {
-    res.sendStatus(200);
+    res.status(200).send({ userId: res.locals.userId });
   })
   .get('/', (req, res) => {
     const query = 'SELECT * FROM users';
