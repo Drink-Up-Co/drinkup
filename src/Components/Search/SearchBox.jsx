@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) =>
   }),
 );
 
-const ingredientsList = [];
+let ingredientsList = [];
 
 const SearchBox = ({ setCocktailList}) => {
   const classes = useStyles();
@@ -84,8 +84,15 @@ const SearchBox = ({ setCocktailList}) => {
       .then(res => res.json())
       .then(data => {
         console.log(data);
-        setCocktailList(data)})
+        setCocktailList(data)
+        ingredientsList = [];
+        setTagsArray([]);
+        setInput('dog');
+        console.log('input -->', input);
+      })  
       .catch(err => console.log(err));
+    
+    console.log('fetch complete');
     // list of cocktails we get back after fetch request with ingredients list
   }
 
@@ -126,12 +133,21 @@ const SearchBox = ({ setCocktailList}) => {
           getOptionLabel={(option) => option.name}
           getOptionSelected={(option, value) => option.name === value.name}
           style={{ width: 300 }}
-          renderInput={(params) => <TextField {...params} label="Ingredients" variant="outlined" ref={textFieldRef}/>}
+          onChange={(e)=>setInput(e.target.value)}
+          renderInput={
+            (params) => 
+              <TextField
+                {...params}
+                label="Ingredients"
+                variant="outlined"
+                ref={textFieldRef}
+              />
+          }
         />
         <Button
           variant="contained"
           size="large"
-          color="primary"
+          color="secondary"
           onClick={handleAddClick}
           className={classes.btn}
         >
@@ -140,7 +156,7 @@ const SearchBox = ({ setCocktailList}) => {
         <Button
           variant="contained"
           size="large"
-          color="primary"
+          color="secondary"
           onClick={handleSearchClick}
           className={classes.btn}
         >
