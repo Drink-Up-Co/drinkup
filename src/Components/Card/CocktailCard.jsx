@@ -37,6 +37,7 @@ export default function CocktailCard({ drinkId, name, image}) {
   const [expanded, setExpanded] = useState(false);
   const [info, setInfo] = useState('');
   const [ingredients, setIngredients] = useState('');
+  const [clicked, setClicked] = useState(false);
 
   const handleExpandClick = () => {
     if (info === '') {
@@ -75,6 +76,24 @@ export default function CocktailCard({ drinkId, name, image}) {
     }
   }
 
+  const handleFavoritesClick = () => {
+    // toggle favorites button when clicked
+    setClicked(!clicked);
+  }
+
+  
+  // Upon rendering of card, check if userID (foreign_key_users) is in the Favorites table with cocktail_id (foreign_key_cocktails)
+    // if found, render red heart
+    // if not found, render grey heart
+  
+  // When clicked
+    // toggle colour of heart
+    // update state of favorite
+        // add user_id to favorites table
+        // or
+        // remove user_id from favorites table
+
+
   return (
     <Card className={classes.root} id={drinkId}>
       <CardActionArea>
@@ -92,8 +111,9 @@ export default function CocktailCard({ drinkId, name, image}) {
           </Typography>
         </CardContent>
       <CardActions>
-        <IconButton aria-label='add to favorites'>
-          <FavoriteIcon />
+        <IconButton aria-label='add to favorites' onClick={handleFavoritesClick}>
+          <FavoriteIcon color={clicked ? 'secondary' : 'disabled'}
+          />
         </IconButton>
         <Button
           size='small'
