@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, useContext } from 'react';
 import { TextField, Button } from '@material-ui/core';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import Autocomplete from '@material-ui/lab/Autocomplete';
+import Autocomplete, { createFilterOptions } from '@material-ui/lab/Autocomplete';
 import SearchTag from './SearchTag';
 import SearchError from './SearchError';
 import ingredients from '../Ingredients';
@@ -91,7 +91,6 @@ const SearchBox = () => {
     // list of cocktails we get back after fetch request with ingredients list
   }
 
-
   const generateTags = () => {
     const tags = ingredientsList.map((ingredient, i) => {
       return (
@@ -112,15 +111,22 @@ const SearchBox = () => {
     }
   }
 
+  const filterOptions = createFilterOptions({
+    matchFrom: 'start',
+    stringify: (option) => option.name,
+  });
+
   return (
     <div className={classes.root}>
       <h2 className={classes.title}>Select ingredients you have</h2>
       <div className={classes.searchFormWrapper}>
         <Autocomplete
+          filterOptions={filterOptions}
           id="ingredients"
           options={options.sort((a, b) => -b.firstLetter.localeCompare(a.firstLetter))}
           groupBy={(option) => option.firstLetter}
           getOptionLabel={(option) => option.name}
+          getOptionSelected={(option, value) => option.name === value.name}
           style={{ width: 300 }}
           renderInput={(params) => <TextField {...params} label="Ingredients" variant="outlined" ref={textFieldRef}/>}
         />
