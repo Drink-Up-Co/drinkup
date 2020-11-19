@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -11,7 +11,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import IconButton from '@material-ui/core/IconButton';
 import clsx from 'clsx';
 import Collapse from '@material-ui/core/Collapse';
-import UserContext from '../../App';
+import {UserContext} from '../../App';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -78,8 +78,21 @@ export default function CocktailCard({ drinkId, name, image}) {
   }
 
   const handleFavoritesClick = () => {
-    // toggle favorites button when clicked
-    setClicked(!clicked);
+    // Send userId and drink name to server
+    fetch('/favorites', {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        "drinkName": name,
+        "userId": userId
+      })
+    })
+    .then(res => res.json())
+    .then(data => {
+      data.favorite ? setClicked(true) : setClicked(false);
+    })
   }
 
   
