@@ -43,6 +43,7 @@ export default function CocktailCard({ drinkId, name, image }) {
   const [clicked, setClicked] = useState(false);
   const [upvoted, setUpvoted] = useState(false);
   const [downvoted, setDownvoted] = useState(false);
+  const [counter, setCounter] = useState('');
   const [userId] = useContext(UserContext);
 
   const handleExpandClick = () => {
@@ -119,8 +120,6 @@ export default function CocktailCard({ drinkId, name, image }) {
 
   const handleUpvoteClick = () => {
     if (!upvoted) {
-
-
       fetch('/votes/upvote', {
         method: 'POST',
         headers: {
@@ -135,14 +134,13 @@ export default function CocktailCard({ drinkId, name, image }) {
       .then(data => {
         setUpvoted(true);
         setDownvoted(false);
+        setCounter(data.counter);
       }))
-    }
+    } 
   }
 
   const handleDownvoteClick = () => {
     if (!downvoted) {
-
-
       fetch('/votes/downvote', {
         method: 'POST',
         headers: {
@@ -157,6 +155,7 @@ export default function CocktailCard({ drinkId, name, image }) {
       .then(data => {
         setDownvoted(true);
         setUpvoted(false);
+        setCounter(data.counter);
       }))
     }
   }
@@ -181,26 +180,38 @@ export default function CocktailCard({ drinkId, name, image }) {
             </Typography>
           </CardContent>
         </Box>
-          <Box display="flex" flexDirection="column">
-            <Button
-              onClick={handleUpvoteClick}
-              variant={upvoted ? 'contained' : 'outlined'}
-              color="primary"
-              size="small"
-              startIcon={<ArrowUpwardOutlinedIcon />}
-            >
-              Yay
-            </Button>
-            <Button
-              onClick={handleDownvoteClick}
-              variant={downvoted ? 'contained' : 'outlined'}
-              color="primary"
-              size="small"
-              startIcon={<ArrowDownwardOutlinedIcon />}
-            >
-              Nay
-            </Button>
+          <Box display="flex" flexDirection="row">  
+            {counter !== '' && 
+              <Box display="flex" flexDirection="column" alignItems="center" border={1} borderRadius={2} borderColor="grey.300" px={1} mr={2}>
+                <Typography variant='overline'>
+                  Votes
+                </Typography>
+                <Typography variant='h5'>
+                  {counter}
+                </Typography>
+              </Box>
+            }
 
+            <Box display="flex" flexDirection="column">
+              <Button
+                onClick={handleUpvoteClick}
+                variant={upvoted ? 'contained' : 'outlined'}
+                color="primary"
+                size="small"
+                startIcon={<ArrowUpwardOutlinedIcon />}
+              >
+                Yay
+              </Button>
+              <Button
+                onClick={handleDownvoteClick}
+                variant={downvoted ? 'contained' : 'outlined'}
+                color="primary"
+                size="small"
+                startIcon={<ArrowDownwardOutlinedIcon />}
+              >
+                Nay
+              </Button>
+            </Box>
           </Box>
       </Box>
       <CardActions>
