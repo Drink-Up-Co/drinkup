@@ -5,7 +5,6 @@ const authController = require("../controllers/authController");
 
 router
   .post('/login', authController.checkUser, authController.saveUser, (req, res) => {
-    console.log("OAUTH ROUTE ID: ", res.locals.userId);
     res.status(200).send({ userId: res.locals.userId });
   })
   .get('/', (req, res) => {

@@ -3,6 +3,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import LocalBarIcon from '@material-ui/icons/LocalBar';
 import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
+import LogoutButton from '../../LogoutButton';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -25,7 +26,7 @@ const useStyles = makeStyles((theme) =>
     img: {
       height: '50px',
       borderRadius: '30px',
-      marginLeft: '10px'  
+      marginLeft: '10px'
     }
   }),
 );
@@ -43,8 +44,9 @@ const LoggedIn = (props) => {
       <div className={classes.favorites}>
         {nickname}
         <img src={picture} className={classes.img}/>
+        <LogoutButton />
       </div>
-    </div>  
+    </div>
   );
 }
 

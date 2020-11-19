@@ -19,10 +19,7 @@ module.exports = {
       const query = 'INSERT INTO users(username, email) VALUES($1, $2)';
       const values = [req.body.nickname, req.body.email];
       db.query(query, values)
-      .then(response => {
-        console.log(response.rows);
-        return next();
-      })
+      .then(next())
       .catch(err => next(err));
     }
     return next();

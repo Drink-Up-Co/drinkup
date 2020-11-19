@@ -79,20 +79,37 @@ export default function CocktailCard({ drinkId, name, image }) {
 
   const handleFavoritesClick = () => {
     // Send userId and drink name to server
-    fetch('/favorites', {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        "drinkName": name,
-        "userId": userId
+    if (!clicked) {
+      fetch('/favorites/addToMyFav', {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          "drinkName": name,
+          "userId": userId
+        })
       })
-    })
-    .then(res => res.json())
-    .then(data => {
-      data.favorite ? setClicked(true) : setClicked(false);
-    })
+      .then(res => res.json())
+      .then(data => {
+        setClicked(true);
+      })
+    } else {
+      fetch('/favorites/deleteFromFav', {
+        method: 'DELETE',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          "drinkName": name,
+          "userId": userId
+        })
+      })
+      .then(res => res.json())
+      .then(data => {
+        setClicked(false);
+      })
+    }
   }
 
 
