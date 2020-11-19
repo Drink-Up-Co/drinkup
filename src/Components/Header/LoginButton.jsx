@@ -20,7 +20,7 @@ const LoginButton = () => {
       onClick={() => loginWithRedirect()}
       variant="contained"
       size="large"
-      color="primary"
+      color="secondary"
       className={classes.btn}
     >
       Log In
