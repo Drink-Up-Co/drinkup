@@ -8,7 +8,6 @@ module.exports = {
       .then(response => {
         if (response.rows.length > 0) {
           res.locals.userId = response.rows[0].id;
-          return next();
         }
         return next();
       })

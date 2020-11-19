@@ -2,7 +2,7 @@ const path = require('path');
 const express = require('express');
 
 // Require in your controllers:
-const controller = require('./controllers/controllers.js');
+// const controller = require('./controllers/controllers.js');
 // require in to parse req.body
 // const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -15,6 +15,7 @@ const PORT = 3000;
 const cocktailRouter = require('./routes/cocktail');
 const oauthRouter = require('./routes/oauth');
 const favoritesRouter = require('./routes/favorites');
+const voteRouter = require('./routes/vote');
 
 // parses incoming data in request body
 server.use(express.json());
@@ -31,7 +32,7 @@ server.use(express.static(path.resolve(__dirname, '../index.html')));
 server.use('/oauth', oauthRouter);
 server.use('/cocktail', cocktailRouter);
 server.use('/favorites', favoritesRouter);
-server.get('/upvote');
+server.use('/vote', voteRouter);
 
 // catch all route handler must be at the end
 server.use('*', (req, res) => res.sendStatus(404));
