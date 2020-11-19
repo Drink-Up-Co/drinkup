@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) =>
       justifyContent: 'space-between',
       alignItems: 'center',
       height: '70px',
-      backgroundColor: '#2e050d',
+      backgroundColor: theme.palette.primary.main,
       margin: '0px',
       padding: '0px',
       boxShadow: '0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12)'
@@ -56,9 +56,12 @@ const Header = ({ setUserId }) => {
       <Link className={classes.logo} to={'/'}>
         <h1>Drink Up</h1>
       </Link>
-      {isAuthenticated
+      { isAuthenticated
         ? <LoggedIn style={{paddingRight: '10px'}} />
-        : <LoginButton style={{paddingRight: '10px'}} />}
+        : <LoginButton style={{paddingRight: '10px'}} />
+      }
+        {/* <LoggedIn style={{paddingRight: '10px'}} />
+        <LoginButton style={{paddingRight: '10px'}} /> */}
     </div>
   );
 }
