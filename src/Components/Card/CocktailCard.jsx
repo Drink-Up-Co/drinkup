@@ -15,6 +15,7 @@ import Box from '@material-ui/core/Box';
 import clsx from 'clsx';
 import Collapse from '@material-ui/core/Collapse';
 import { UserContext } from '../../App';
+import { CardContext } from '../../App';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -45,6 +46,12 @@ export default function CocktailCard({ drinkId, name, image }) {
   const [downvoted, setDownvoted] = useState(false);
   const [counter, setCounter] = useState('');
   const [userId] = useContext(UserContext);
+  const [newCard] = useContext(CardContext);
+
+  useEffect(() =>{
+    setIngredients('');
+    setInfo('');
+  },[newCard]);
 
   const handleExpandClick = () => {
     if (info === '') {
@@ -57,7 +64,6 @@ export default function CocktailCard({ drinkId, name, image }) {
       })
         .then(res => res.json())
         .then(data => {
-          console.log("More Info Data: ", data);
           setInfo(data.instructions);
         })
         .catch(err => console.log(err));
@@ -76,7 +82,6 @@ export default function CocktailCard({ drinkId, name, image }) {
       })
         .then(res => res.json())
         .then(data => {
-          console.log("More Info Data: ", data);
           setIngredients(data.ingredients);
         })
         .catch(err => console.log(err));

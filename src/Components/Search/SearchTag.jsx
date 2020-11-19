@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 
 
 const SearchTag = (props) => {
-  
   return (
     <div style={style.wrapper}>
       <div style={style.text}>{props.name}</div>
