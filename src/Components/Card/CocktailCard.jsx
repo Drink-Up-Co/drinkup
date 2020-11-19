@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect, useRef } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -39,6 +39,11 @@ export default function CocktailCard({ drinkId, name, image}) {
   const [ingredients, setIngredients] = useState('');
   const [clicked, setClicked] = useState(false);
   const [userId] = useContext(UserContext);
+
+  useEffect(() => {
+    const prevIngredients = useRef()
+    setIngredients()
+  },[ingredients])
 
   const handleExpandClick = () => {
     if (info === '') {
@@ -94,19 +99,6 @@ export default function CocktailCard({ drinkId, name, image}) {
       data.favorite ? setClicked(true) : setClicked(false);
     })
   }
-
-  
-  // Upon rendering of card, check if userID (foreign_key_users) is in the Favorites table with cocktail_id (foreign_key_cocktails)
-    // if found, render red heart
-    // if not found, render grey heart
-  
-  // When clicked
-    // toggle colour of heart
-    // update state of favorite
-        // add user_id to favorites table
-        // or
-        // remove user_id from favorites table
-
 
   return (
     <Card className={classes.root} id={drinkId}>
