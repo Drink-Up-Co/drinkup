@@ -129,15 +129,16 @@ const SearchBox = ({ setCocktailList}) => {
           getOptionLabel={(option) => option.name}
           getOptionSelected={(option, value) => option.name === value.name}
           style={{ width: 300 }}
-          onChange={(e)=>setInput(e.target.value)}
           renderInput={
-            (params) => 
-              <TextField
+            (params) =>{
+              return (<TextField
                 {...params}
                 label="Ingredients"
                 variant="outlined"
+                onChange={(e)=>setInput(e.target.value)}
+                value={input}
                 ref={textFieldRef}
-              />
+                />)}
           }
         />
         <Button
