@@ -44,6 +44,7 @@ export default function CocktailCard({ drinkId, name, image }) {
 
   useEffect(() =>{
     setIngredients('');
+    setInfo('');
   },[newCard]);
 
   const handleExpandClick = () => {
