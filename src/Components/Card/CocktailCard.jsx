@@ -120,7 +120,7 @@ export default function CocktailCard({ drinkId, name, image }) {
 
   const handleUpvoteClick = () => {
     if (!upvoted) {
-      fetch('/votes/upvote', {
+      fetch('/vote/upVote', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -130,18 +130,18 @@ export default function CocktailCard({ drinkId, name, image }) {
           "userId": userId,
         })
       })
-      .then(res => res.data()
+      .then(res => res.json())
       .then(data => {
         setUpvoted(true);
         setDownvoted(false);
-        setCounter(data.counter);
-      }))
-    } 
+        setCounter(Number(data.count));
+      })
+    }
   }
 
   const handleDownvoteClick = () => {
     if (!downvoted) {
-      fetch('/votes/downvote', {
+      fetch('/vote/downVote', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -151,12 +151,13 @@ export default function CocktailCard({ drinkId, name, image }) {
           "userId": userId,
         })
       })
-      .then(res => res.data()
+      .then(res => res.json())
       .then(data => {
         setDownvoted(true);
         setUpvoted(false);
-        setCounter(data.counter);
-      }))
+        console.log('data.count: ', data.count);
+        setCounter(Number(data.count));
+      })
     }
   }
 
@@ -175,13 +176,13 @@ export default function CocktailCard({ drinkId, name, image }) {
             <Typography variant='body2' color='textSecondary' component='p'>
               Ingredients: {ingredients}
               { (ingredients === '') &&
-                <button onClick={handleGetIngredients}>...</button>
+                <button className='ingredientsBtn' onClick={handleGetIngredients}>...</button>
               }
             </Typography>
           </CardContent>
         </Box>
-          <Box display="flex" flexDirection="row">  
-            {counter !== '' && 
+          <Box display="flex" flexDirection="row">
+            {counter !== '' &&
               <Box display="flex" flexDirection="column" alignItems="center" border={1} borderRadius={2} borderColor="grey.300" px={1} mr={2}>
                 <Typography variant='overline'>
                   Votes

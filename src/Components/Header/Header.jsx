@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) =>
 const Header = ({ setUserId }) => {
   const { user, isAuthenticated } = useAuth0();
   const classes = useStyles();
-  console.log(user);
+
   if (isAuthenticated) {
     fetch('/oauth/login', {
       method: "POST",
