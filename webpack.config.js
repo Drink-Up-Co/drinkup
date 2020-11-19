@@ -3,13 +3,11 @@ const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 
 const config = {
-  entry: [
-    'react-hot-loader/patch',
-    './src/index.js'
-  ],
+  entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    publicPath: '/'
   },
   module: {
     rules: [
@@ -57,35 +55,17 @@ const config = {
     }
   },
   devServer: {
-    host: 'localhost',
     port: 8080,
     contentBase: path.join(__dirname, 'dist'),
-    publicPath: '/',
-    hot: true,
     historyApiFallback: true,
     headers: {
       'Access-Control-Allow-Origin': '*',
     },
     proxy: {
-      '/': {
-        target: 'http://localhost:5432',
-        secure: false
-      },
-      '/oauth/**': {
-        target: 'http://localhost:5432/oauth',
+      '/' : {
+        target: 'http://localhost:3000',
         secure: false,
-      },
-      '/favorites/**': {
-        target: 'http://localhost:5432/favorites',
-        secure: false,
-      },
-      '/vote/**': {
-        target: 'http://localhost:5432/vote',
-        secure: false,
-      },
-      '/cocktail/**': {
-        target: 'http://localhost:5432/cocktail',
-        secure: false,
+        "changeOrigin": true
       },
     }
   },

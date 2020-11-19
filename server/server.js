@@ -11,7 +11,7 @@ const { response } = require('express');
 
 // create express app instance
 const server = express();
-const PORT = 5432;
+const PORT = 3000;
 
 // parses incoming data in request body
 server.use(express.json());
