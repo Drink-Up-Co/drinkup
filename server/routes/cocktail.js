@@ -13,7 +13,8 @@ router
       .then(res => res.json())
       .then(data => {
         console.log("response -->", data.drinks);
-        res.send(data.drinks);
+        if (data.drinks === 'None Found') res.send([]);
+        else res.send(data.drinks);
       })
       .catch(err => console.log(err))
   })

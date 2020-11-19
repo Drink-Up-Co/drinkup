@@ -1,6 +1,8 @@
 import React from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
-import FavoriteCard from './FavoriteCard';
+import FavoriteCard1 from './FavoriteCard1';
+import FavoriteCard2 from './FavoriteCard2';
+import FavoriteCard3 from './FavoriteCard3';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -30,12 +32,9 @@ const FavoritesContent = (props) => {
     <div className={classes.root}>
       <h1 className={classes.title}>My Favorites</h1>
       <div className={classes.cardsWrapper}>
-        <FavoriteCard />
-        <FavoriteCard />
-        <FavoriteCard />
-        <FavoriteCard />
-        <FavoriteCard />
-        <FavoriteCard />
+        <FavoriteCard1 />
+        <FavoriteCard2 />
+        <FavoriteCard3 />
       </div>
     </div>
   );

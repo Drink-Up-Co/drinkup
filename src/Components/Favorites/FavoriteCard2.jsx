@@ -39,7 +39,7 @@ export default function MediaCard() {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const [heartColor, setHeartColor] = useState('red');
-  
+
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -58,18 +58,18 @@ export default function MediaCard() {
   return (
     <Card className={classes.root}>
       <CardActionArea>
-        <CardMedia className={classes.media} />
+        <CardMedia className={classes.media} image={"https://www.thecocktaildb.com/images/media/drink/bcsj2e1487603625.jpg"} />
         <CardContent>
           <Typography gutterBottom variant='h5' component='h2'>
-            Sake Bomb
+            Imperial Cocktail
           </Typography>
           <Typography variant='body2' color='textSecondary' component='p'>
-            Description of what a Sake Bomb is ...
+            Ingredients: Lime juice - 4 cl | Gin - 2 cl | Aperol - 4 cl |
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <IconButton 
+        <IconButton
           aria-label='add to favorites'
           className={classes.heart}
           onClick={removeFavorite}
@@ -90,17 +90,7 @@ export default function MediaCard() {
       <Collapse in={expanded} timeout='auto' unmountOnExit>
         <CardContent>
           <Typography paragraph>
-            The sake bomb or sake bomber is a beer cocktail made by pouring sake
-            into a shot glass and dropping it into a glass of beer. Sometimes
-            two chopsticks are placed parallel on top of the glass of beer, and
-            the shot glass is placed on top of them.
-          </Typography>
-          <Typography paragraph>
-            1. Fill a Collins glass with the beer. <br></br> 2. Pour the sake
-            into a shot glass. Place 2 chopsticks on top of the glass and
-            balance the shot glass on the chopsticks. <br></br> 3. While doing
-            the "sake chant" the guest beats on table until shot glass falls
-            into the beer glass.
+            Shake with ice and strain into cocktail glass.
           </Typography>
         </CardContent>
       </Collapse>
