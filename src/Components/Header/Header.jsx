@@ -31,16 +31,30 @@ const useStyles = makeStyles((theme) =>
 );
 
 const Header = (props) => {
-  const { user, isAuthenticated, isLoading } = useAuth0();
+  const { user, isAuthenticated } = useAuth0();
   const classes = useStyles();
+  console.log(user);
+  if (isAuthenticated) {
+    fetch('/oauth/login', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(user)
+    })
+      .then(res => res.json())
+      .then(data => console.log("User saved in database - client side"))
+      .catch(err => console.log(err));
+  }
+
   return (
     <div className={classes.container}>
       <Link className={classes.logo} to={'/'}>
         <h1>Drink Up</h1>
       </Link>
-      {isAuthenticated 
-        ? <LoggedIn style={{paddingRight: '10px'}} /> 
-        : <LoginButton style={{paddingRight: '10px'}} />} 
+      {isAuthenticated
+        ? <LoggedIn style={{paddingRight: '10px'}} />
+        : <LoginButton style={{paddingRight: '10px'}} />}
     </div>
   );
 }

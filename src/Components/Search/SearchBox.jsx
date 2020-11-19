@@ -76,7 +76,7 @@ const SearchBox = () => {
     const myBody = {
       ingredients: ingredientsList
     }
-    fetch('/cocktail', {
+    fetch('/cocktail/search', {
       method: "POST",
       headers: {
         'Content-Type': 'application/json',
@@ -100,7 +100,7 @@ const SearchBox = () => {
     setTagsArray(tags);
   }
 
-  const deleteTag = (ingredient) => {  
+  const deleteTag = (ingredient) => {
     return () => {
       for (let i = 0; i < ingredientsList.length; i += 1) {
         if (ingredientsList[i] === ingredient) {
@@ -133,7 +133,7 @@ const SearchBox = () => {
         <Button
           variant="contained"
           size="large"
-          color="primary" 
+          color="primary"
           onClick={handleAddClick}
           className={classes.btn}
         >
@@ -142,7 +142,7 @@ const SearchBox = () => {
         <Button
           variant="contained"
           size="large"
-          color="primary"  
+          color="primary"
           onClick={handleSearchClick}
           className={classes.btn}
         >
