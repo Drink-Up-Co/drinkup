@@ -1,20 +1,19 @@
 
-import React, { useState, createContext, useContext } from "react";
+import React, { createContext, useState } from "react";
 import { hot } from 'react-hot-loader/root';
 import Main from './Components/Main/Main';
 import Header from './Components/Header/Header';
 
-export const ListContext = createContext([[], () => {}]);
+export const UserContext = createContext(NaN);
 
 function App() {
-  const [cocktailList, setCocktailList] = useState([]);
+  const [userId, setUserId] = useState(Nan);
   return (
     <>
-      <ListContext.Provider value={[cocktailList, setCocktailList]} >
-        <Header />
+      <UserContext.Provider value={[userId, setUserId]} >
+        <Header setUserId={setUserId} />
         <Main />
-        {/* <SearchBox setCocktailList={setCocktailList}/> */}
-      </ListContext.Provider>
+      </UserContext.Provider>
     </>
   );
 }

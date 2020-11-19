@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState, createContext } from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import SearchBox from '../Search/SearchBox';
 import hero from '../../Images/banner.png';
 import CardsContainer from './CardsContainer';
 // import Results from '../Content/Results';
+
+export const ListContext = createContext([[], () => {}]);
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -15,7 +17,7 @@ const useStyles = makeStyles((theme) =>
       margin: '0px',
       backgroundImage: `url(${hero})`,
       backgroundSize: 'cover',
-      height: '800px'  
+      height: '800px'
     },
     title: {
       fontSize: '90px',
@@ -34,14 +36,18 @@ const useStyles = makeStyles((theme) =>
 
 const Main = (props) => {
   const classes = useStyles();
+  const [cocktailList, setCocktailList] = useState([]);
+
   return (
-    <div>
-      <div className={classes.root}>
-        <h1 className={classes.title}>Time To Drink Up</h1>
-        <SearchBox />
+    <ListContext.Provider value={[cocktailList, setCocktailList]} >
+      <div>
+        <div className={classes.root}>
+          <h1 className={classes.title}>Time To Drink Up</h1>
+          <SearchBox setCocktailList={setCocktailList} />
+        </div>
+          <CardsContainer cocktailList={cocktailList} />
       </div>
-        <CardsContainer />
-    </div>
+    </ListContext.Provider>
   );
 }
 

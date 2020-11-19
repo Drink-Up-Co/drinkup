@@ -11,7 +11,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import IconButton from '@material-ui/core/IconButton';
 import clsx from 'clsx';
 import Collapse from '@material-ui/core/Collapse';
-
+import UserContext from '../../App';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,6 +37,7 @@ export default function CocktailCard({ drinkId, name, image}) {
   const [expanded, setExpanded] = useState(false);
   const [info, setInfo] = useState('');
   const [ingredients, setIngredients] = useState('');
+  const [userId] = useContext(UserContext);
 
   const handleExpandClick = () => {
     if (info === '') {
