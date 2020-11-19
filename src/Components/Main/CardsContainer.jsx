@@ -1,5 +1,5 @@
-import React from 'react'
-import CocktailCard from '../Card/CocktailCard'
+import React from 'react';
+import CocktailCard from '../Card/CocktailCard';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) =>

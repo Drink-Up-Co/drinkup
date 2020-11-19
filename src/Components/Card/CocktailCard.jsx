@@ -11,7 +11,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import IconButton from '@material-ui/core/IconButton';
 import clsx from 'clsx';
 import Collapse from '@material-ui/core/Collapse';
-import {UserContext} from '../../App';
+import { UserContext } from '../../App';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CocktailCard({ drinkId, name, image}) {
+export default function CocktailCard({ drinkId, name, image }) {
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
   const [info, setInfo] = useState('');
@@ -79,27 +79,44 @@ export default function CocktailCard({ drinkId, name, image}) {
 
   const handleFavoritesClick = () => {
     // Send userId and drink name to server
-    fetch('/favorites', {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        "drinkName": name,
-        "userId": userId
+    if (!clicked) {
+      fetch('/favorites/addToMyFav', {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          "drinkName": name,
+          "userId": userId
+        })
       })
-    })
-    .then(res => res.json())
-    .then(data => {
-      data.favorite ? setClicked(true) : setClicked(false);
-    })
+      .then(res => res.json())
+      .then(data => {
+        setClicked(true);
+      })
+    } else {
+      fetch('/favorites/deleteFromFav', {
+        method: 'DELETE',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          "drinkName": name,
+          "userId": userId
+        })
+      })
+      .then(res => res.json())
+      .then(data => {
+        setClicked(false);
+      })
+    }
   }
 
-  
+
   // Upon rendering of card, check if userID (foreign_key_users) is in the Favorites table with cocktail_id (foreign_key_cocktails)
     // if found, render red heart
     // if not found, render grey heart
-  
+
   // When clicked
     // toggle colour of heart
     // update state of favorite
