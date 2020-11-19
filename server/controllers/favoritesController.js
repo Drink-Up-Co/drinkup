@@ -43,11 +43,12 @@ module.exports = {
             .catch(err => next(err));
         })
         .catch(err => console.log(err));
+    } else {
+      return next();
     }
-    return next();
   },
   checkFavoritesTable: (req, res, next) => {
-    const query = "SELECT * FROM favorites WHERE user_id = $1";
+    const query = "SELECT * FROM favorites WHERE user_Id = $1";
     const values = [req.body.userId];
     db.query(query, values)
       .then(response => {
@@ -61,7 +62,7 @@ module.exports = {
   },
   addToFavorites: (req, res, next) => {
     if (!res.locals.alreadyFavorite) {
-      const query = "INSERT INTO favorites(cocktail_id, user_id) VALUES($1, $2)";
+      const query = "INSERT INTO favorites(cocktail_id, user_Id) VALUES($1, $2)";
       const values = [res.locals.cocktailId, req.body.userId];
       db.query(query, values)
         .then(response => {
@@ -69,12 +70,13 @@ module.exports = {
           return next();
         })
         .catch(err => next(err));
+    } else {
+      return next();
     }
-    return next();
   },
   deleteFromFavorites: (req, res, next) => {
     if (res.locals.alreadyFavorite) {
-      const query = "DELETE FROM favorites WHERE cocktail_id = $1 AND user_id = $2";
+      const query = "DELETE FROM favorites WHERE cocktail_id = $1 AND user_Id = $2";
       const values = [res.locals.cocktailId, req.body.userId];
       db.query(query, values)
         .then(response => {
@@ -82,7 +84,8 @@ module.exports = {
           return next();
         })
         .catch(err => next(err));
+    } else {
+      return next();
     }
-    return next();
   }
 }

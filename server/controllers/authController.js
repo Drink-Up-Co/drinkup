@@ -21,7 +21,8 @@ module.exports = {
       db.query(query, values)
       .then(next())
       .catch(err => next(err));
+    } else {
+      return next();
     }
-    return next();
   }
 };
